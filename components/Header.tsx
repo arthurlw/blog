@@ -6,7 +6,7 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6 py-6 max-w-2xl">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold no-underline hover:no-underline">
-            Arthur's Open Source Blog
+            Arthur&apos;s Open Source Blog
           </Link>
           <nav>
             <ul className="flex space-x-4">

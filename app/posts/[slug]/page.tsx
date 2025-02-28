@@ -3,11 +3,15 @@ import Link from 'next/link';
 import { getPostContent, getAllPosts } from '@/lib/api';
 import { Metadata } from 'next';
 
+interface PageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
 export async function generateMetadata({ 
   params 
-}: { 
-  params: { slug: string } 
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const post = await getPostContent(resolvedParams.slug);
   
@@ -24,11 +28,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post({ 
-  params 
-}: { 
-  params: { slug: string } 
-}) {
+export default async function Post({ params }: PageProps) {
   const resolvedParams = await params;
   const post = await getPostContent(resolvedParams.slug);
   
