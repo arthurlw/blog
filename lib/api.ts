@@ -31,10 +31,13 @@ export function getPostBySlug(slug: string): Post {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
+  // Ensure the date is a valid ISO string
+  const date = data.date ? new Date(data.date).toISOString() : new Date().toISOString();
+
   return {
     slug: realSlug,
     title: data.title,
-    date: data.date,
+    date: date,
     excerpt: data.excerpt || '',
     content,
     coverImage: data.coverImage || null,
@@ -61,4 +64,14 @@ export function getAllPosts(): Post[] {
     .map((slug) => getPostBySlug(slug))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
+}
+
+export function getAdjacentPosts(currentSlug: string) {
+  const posts = getAllPosts();
+  const currentIndex = posts.findIndex((post) => post.slug === currentSlug);
+  
+  return {
+    nextPost: currentIndex > 0 ? posts[currentIndex - 1] : null,
+    previousPost: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null,
+  };
 }

@@ -5,7 +5,7 @@ export default function Header() {
     <header className="border-b border-gray-100">
       <div className="container mx-auto px-4 sm:px-6 py-6 max-w-2xl">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold no-underline hover:no-underline">
+          <Link href="/" className="text-1xl font-bold no-underline hover:no-underline">
             Arthur&apos;s Open Source Blog
           </Link>
           <nav>
